@@ -3,7 +3,7 @@ configure
 echo "System Configuration"
 #--------------------------------------------------
     system
-        name "R-N3"
+        name "SR-N3"
         power-shelf 1
             power-shelf-type ps-a4-shelf-dc
             power-module 1
