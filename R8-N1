@@ -1,0 +1,1029 @@
+configure
+#--------------------------------------------------
+echo "System Configuration"
+#--------------------------------------------------
+    system
+        name "R8-N1"
+        power-shelf 1
+            power-shelf-type ps-a4-shelf-dc
+            power-module 1
+                power-module-type ps-a-dc-6000
+                no shutdown
+            exit
+            power-module 2
+                power-module-type ps-a-dc-6000
+                no shutdown
+            exit
+            power-module 3
+                power-module-type ps-a-dc-6000
+                no shutdown
+            exit
+            power-module 4
+                power-module-type ps-a-dc-6000
+                no shutdown
+            exit
+            no shutdown
+        exit
+        management-interface
+            yang-modules
+                no nokia-combined-modules
+                nokia-submodules
+            exit
+        exit
+        time
+            sntp
+                shutdown
+            exit
+            zone UTC
+        exit
+        bluetooth
+            module A
+            exit
+            power off
+        exit
+    exit
+#--------------------------------------------------
+echo "System Security Configuration"
+#--------------------------------------------------
+    system
+        security
+            profile "default"
+                netconf
+                    base-op-authorization
+                        action
+                        cancel-commit
+                        close-session
+                        commit
+                        copy-config
+                        create-subscription
+                        delete-config
+                        discard-changes
+                        edit-config
+                        get
+                        get-config
+                        get-data
+                        get-schema
+                        validate
+                    exit
+                exit
+                entry 10
+                    match "exec"
+                    action permit
+                exit
+                entry 20
+                    match "exit"
+                    action permit
+                exit
+                entry 30
+                    match "help"
+                    action permit
+                exit
+                entry 40
+                    match "logout"
+                    action permit
+                exit
+                entry 50
+                    match "password"
+                    action permit
+                exit
+                entry 60
+                    match "show config"
+                    action deny
+                exit
+                entry 65
+                    match "show li"
+                    action deny
+                exit
+                entry 66
+                    match "clear li"
+                    action deny
+                exit
+                entry 67
+                    match "tools dump li"
+                    action deny
+                exit
+                entry 68
+                    match "state li"
+                    action deny
+                exit
+                entry 70
+                    match "show"
+                    action permit
+                exit
+                entry 75
+                    match "state"
+                    action permit
+                exit
+                entry 80
+                    match "enable-admin"
+                    action permit
+                exit
+                entry 90
+                    match "enable"
+                    action permit
+                exit
+                entry 100
+                    match "configure li"
+                    action deny
+                exit
+            exit
+            profile "administrative"
+                netconf
+                    base-op-authorization
+                        action
+                        cancel-commit
+                        close-session
+                        commit
+                        copy-config
+                        create-subscription
+                        delete-config
+                        discard-changes
+                        edit-config
+                        get
+                        get-config
+                        get-data
+                        get-schema
+                        kill-session
+                        lock
+                        validate
+                    exit
+                exit
+                entry 10
+                    match "configure system security"
+                    action permit
+                exit
+                entry 20
+                    match "show system security"
+                    action permit
+                exit
+                entry 30
+                    match "tools perform security"
+                    action permit
+                exit
+                entry 40
+                    match "tools dump security"
+                    action permit
+                exit
+                entry 50
+                    match "admin system security"
+                    action permit
+                exit
+                entry 100
+                    match "configure li"
+                    action deny
+                exit
+                entry 110
+                    match "show li"
+                    action deny
+                exit
+                entry 111
+                    match "clear li"
+                    action deny
+                exit
+                entry 112
+                    match "tools dump li"
+                    action deny
+                exit
+            exit
+            per-peer-queuing
+            dist-cpu-protection
+                policy "_default-port-policy" type port create
+                exit
+                policy "_default-access-policy" create
+                exit
+                policy "_default-network-policy" create
+                exit
+            exit
+        exit
+    exit
+#--------------------------------------------------
+echo "Log Configuration"
+#--------------------------------------------------
+    log
+        file-id 66 name "66"
+            description "log for debugs"
+            location cf3:
+            rollover 60 retention 24
+        exit
+        log-id 66 name "66"
+            description "event handler for debug output"
+            from debug-trace
+            to file 66
+            no shutdown
+        exit
+    exit
+#--------------------------------------------------
+echo "Oper-Groups (Declarations) Configuration"
+#--------------------------------------------------
+    service
+    exit
+#--------------------------------------------------
+echo "Card Configuration"
+#--------------------------------------------------
+    card 1
+        card-type xcm-1s
+        mda 1
+            mda-type s18-100gb-qsfp28
+            no shutdown
+        exit
+        no shutdown
+    exit
+#--------------------------------------------------
+echo "Connector Configuration"
+#--------------------------------------------------
+    port 1/1/c1
+        connector
+            breakout c4-10g
+        exit
+        no shutdown
+    exit
+    port 1/1/c2
+        connector
+            breakout c4-10g
+        exit
+        no shutdown
+    exit
+    port 1/1/c3
+        connector
+            breakout c4-10g
+        exit
+        no shutdown
+    exit
+    port 1/1/c4
+        connector
+            breakout c4-10g
+        exit
+        no shutdown
+    exit
+    port 1/1/c5
+        connector
+            breakout c4-10g
+        exit
+        no shutdown
+    exit
+    port 1/1/c6
+        connector
+            breakout c4-10g
+        exit
+        no shutdown
+    exit
+    port 1/1/c7
+        connector
+            breakout c4-10g
+        exit
+        no shutdown
+    exit
+    port 1/1/c8
+        connector
+            breakout c4-10g
+        exit
+        no shutdown
+    exit
+    port 1/1/c9
+        connector
+            breakout c4-10g
+        exit
+        no shutdown
+    exit
+    port 1/1/c10
+        connector
+            breakout c4-10g
+        exit
+        no shutdown
+    exit
+    port 1/1/c11
+        connector
+            breakout c4-10g
+        exit
+        no shutdown
+    exit
+    port 1/1/c12
+        connector
+            breakout c4-10g
+        exit
+        no shutdown
+    exit
+    port 1/1/c13
+        connector
+            breakout c4-10g
+        exit
+        no shutdown
+    exit
+    port 1/1/c14
+        connector
+            breakout c4-10g
+        exit
+        no shutdown
+    exit
+    port 1/1/c15
+        connector
+            breakout c4-10g
+        exit
+        no shutdown
+    exit
+    port 1/1/c16
+        connector
+            breakout c4-10g
+        exit
+        no shutdown
+    exit
+    port 1/1/c17
+        connector
+            breakout c4-10g
+        exit
+        no shutdown
+    exit
+    port 1/1/c18
+        connector
+            breakout c4-10g
+        exit
+        no shutdown
+    exit
+#--------------------------------------------------
+echo "Port Configuration"
+#--------------------------------------------------
+    port 1/1/c1/1
+        ethernet
+        exit
+        no shutdown
+    exit
+    port 1/1/c1/2
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c1/3
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c1/4
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c2/1
+        ethernet
+        exit
+        no shutdown
+    exit
+    port 1/1/c2/2
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c2/3
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c2/4
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c3/1
+        ethernet
+        exit
+        no shutdown
+    exit
+    port 1/1/c3/2
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c3/3
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c3/4
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c4/1
+        ethernet
+            mode access
+            encap-type dot1q
+        exit
+        no shutdown
+    exit
+    port 1/1/c4/2
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c4/3
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c4/4
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c5/1
+        shutdown
+        ethernet
+            mode access
+        exit
+    exit
+    port 1/1/c5/2
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c5/3
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c5/4
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c6/1
+        ethernet
+            mode access
+            encap-type dot1q
+        exit
+        no shutdown
+    exit
+    port 1/1/c6/2
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c6/3
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c6/4
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c7/1
+        ethernet
+        exit
+        no shutdown
+    exit
+    port 1/1/c7/2
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c7/3
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c7/4
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c8/1
+        ethernet
+            mode access
+            encap-type dot1q
+        exit
+        no shutdown
+    exit
+    port 1/1/c8/2
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c8/3
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c8/4
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c9/1
+        ethernet
+        exit
+        no shutdown
+    exit
+    port 1/1/c9/2
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c9/3
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c9/4
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c10/1
+        ethernet
+        exit
+        no shutdown
+    exit
+    port 1/1/c10/2
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c10/3
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c10/4
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c11/1
+        ethernet
+        exit
+        no shutdown
+    exit
+    port 1/1/c11/2
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c11/3
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c11/4
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c12/1
+        ethernet
+        exit
+        no shutdown
+    exit
+    port 1/1/c12/2
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c12/3
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c12/4
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c13/1
+        ethernet
+        exit
+        no shutdown
+    exit
+    port 1/1/c13/2
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c13/3
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c13/4
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c14/1
+        ethernet
+        exit
+        no shutdown
+    exit
+    port 1/1/c14/2
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c14/3
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c14/4
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c15/1
+        ethernet
+        exit
+        no shutdown
+    exit
+    port 1/1/c15/2
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c15/3
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c15/4
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c16/1
+        ethernet
+        exit
+        no shutdown
+    exit
+    port 1/1/c16/2
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c16/3
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c16/4
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c17/1
+        ethernet
+        exit
+        no shutdown
+    exit
+    port 1/1/c17/2
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c17/3
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c17/4
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c18/1
+        ethernet
+            mode access
+        exit
+        no shutdown
+    exit
+    port 1/1/c18/2
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c18/3
+        shutdown
+        ethernet
+        exit
+    exit
+    port 1/1/c18/4
+        shutdown
+        ethernet
+        exit
+    exit
+    port A/3
+        shutdown
+        ethernet
+        exit
+    exit
+    port A/4
+        shutdown
+    exit
+#--------------------------------------------------
+echo "System Sync-If-Timing Configuration"
+#--------------------------------------------------
+    system
+        sync-if-timing
+            begin
+            commit
+        exit
+    exit
+#--------------------------------------------------
+echo "Management Router Configuration"
+#--------------------------------------------------
+    router management
+    exit
+
+#--------------------------------------------------
+echo "Router (Network Side) Configuration"
+#--------------------------------------------------
+    router Base
+        interface "system"
+            address 1.1.1.1/32
+            no shutdown
+        exit
+        interface "toN2"
+            address 10.1.2.1/28
+            port 1/1/c2/1
+            bfd 100 receive 100 multiplier 3
+            no shutdown
+        exit
+        autonomous-system 7029
+        router-id 1.1.1.1
+#--------------------------------------------------
+echo "ISIS Configuration"
+#--------------------------------------------------
+        isis 0
+            level-capability level-2
+            area-id 49.00
+            authentication-key "OF0diHjo5Q4D3K22+Hnod2jpx84pNp4=" hash2
+            authentication-type message-digest
+            export "export-direct-r"
+            level 2
+                wide-metrics-only
+            exit
+            interface "system"
+                level-capability level-2
+                passive
+                no shutdown
+            exit
+            interface "toN2"
+                level-capability level-2
+                interface-type point-to-point
+                bfd-enable ipv4 include-bfd-tlv
+                level 2
+                    metric 5000
+                exit
+                no shutdown
+            exit
+            no shutdown
+        exit
+#--------------------------------------------------
+echo "MPLS Configuration"
+#--------------------------------------------------
+        mpls
+            interface "system"
+                no shutdown
+            exit
+            interface "toN2"
+                no shutdown
+            exit
+        exit
+#--------------------------------------------------
+echo "RSVP Configuration"
+#--------------------------------------------------
+        rsvp
+            shutdown
+            interface "system"
+                no shutdown
+            exit
+            interface "toN2"
+                no shutdown
+            exit
+        exit
+#--------------------------------------------------
+echo "MPLS LSP Configuration"
+#--------------------------------------------------
+        mpls
+            no shutdown
+        exit
+#--------------------------------------------------
+echo "LDP Configuration"
+#--------------------------------------------------
+        ldp
+            import-pmsi-routes
+            exit
+            tcp-session-parameters
+            exit
+            interface-parameters
+                interface "toN2" dual-stack
+                    ipv4
+                        no shutdown
+                    exit
+                    no shutdown
+                exit
+            exit
+            targeted-session
+            exit
+            no shutdown
+        exit
+    exit
+
+#--------------------------------------------------
+echo "Service Configuration"
+#--------------------------------------------------
+    service
+        sdp 87 mpls create
+            far-end 6.6.6.6
+            ldp
+            keep-alive
+                shutdown
+            exit
+            no shutdown
+        exit
+        sdp 100 mpls create
+            description "toN7"
+            far-end 7.7.7.7
+            ldp
+            keep-alive
+                shutdown
+            exit
+            no shutdown
+        exit
+        sdp 102 mpls create
+            description "toN6"
+            far-end 6.6.6.6
+            ldp
+            keep-alive
+                shutdown
+            exit
+            no shutdown
+        exit
+        sdp 17006 mpls create
+            far-end 6.6.6.6
+            ldp
+            keep-alive
+                shutdown
+            exit
+            no shutdown
+        exit
+        sdp 17007 mpls create
+            far-end 7.7.7.7
+            ldp
+            keep-alive
+                shutdown
+            exit
+            no shutdown
+        exit
+        customer 1 name "1" create
+            description "Default customer"
+        exit
+        customer 10 name "10" create
+            description "subscriber A1"
+            contact "mehd.com"
+            phone "0731200000"
+        exit
+        customer 20 name "20" create
+            description "Subsc B"
+            contact "07999999"
+            phone "0987456"
+        exit
+        customer 42 name "42" create
+            description "Subs C"
+            contact "VRPN-MBGP"
+            phone "016170000"
+        exit
+        vprn 3344 name "3344" customer 42 create
+            interface "toR1-VRF3344" create
+            exit
+        exit
+        vpls 65 name "65" customer 20 create
+            description "vpls for Subs B"
+            stp
+                shutdown
+            exit
+            sap 1/1/c6/1:20 create
+                no shutdown
+            exit
+            mesh-sdp 100:65 create
+                no shutdown
+            exit
+            mesh-sdp 102:65 create
+                no shutdown
+            exit
+            no shutdown
+        exit
+        epipe 87 name "87" customer 10 create
+            description "Subscriber-A1 Epipe"
+            sap 1/1/c5/1 create
+                shutdown
+            exit
+            spoke-sdp 87:87871 create
+                no shutdown
+            exit
+            no shutdown
+        exit
+        vprn 3344 name "3344" customer 42 create
+            router-id 192.168.1.0
+            autonomous-system 65000
+            interface "toR1-VRF3344" create
+                address 192.168.1.0/31
+                sap 1/1/c8/1:42 create
+                exit
+            exit
+            bgp-ipvpn
+                mpls
+                    route-distinguisher 65000:3344
+                    vrf-target target:65000:3344
+                    no shutdown
+                exit
+            exit
+            bgp
+                group "toR1"
+                    export "MP_BGP_TO_BGP4"
+                    peer-as 65001
+                    neighbor 192.168.1.1
+                    exit
+                exit
+                no shutdown
+            exit
+            spoke-sdp 17006:3344 create
+                description "toN6"
+            exit
+            spoke-sdp 17007:3344 create
+                description "toN7"
+            exit
+            no shutdown
+        exit
+    exit
+#--------------------------------------------------
+echo "Router (Service Side) Configuration"
+#--------------------------------------------------
+    router Base
+#--------------------------------------------------
+echo "ISIS Configuration"
+#--------------------------------------------------
+        isis 0
+            no shutdown
+        exit
+#--------------------------------------------------
+echo "Policy Configuration"
+#--------------------------------------------------
+        policy-options
+            begin
+            prefix-list "VPRN3344_SITES"
+                prefix 24.137.88.0/24 exact
+                prefix 98.98.98.0/24 exact
+                prefix 151.42.1.0/24 exact
+            exit
+            policy-statement "MP_BGP_TO_BGP4"
+                entry 1
+                    from
+                        protocol bgp-vpn
+                        prefix-list "VPRN3344_SITES"
+                    exit
+                    to
+                        protocol bgp
+                    exit
+                    action accept
+                    exit
+                exit
+            exit
+            policy-statement "export-direct-r"
+                entry 1
+                    from
+                        protocol direct
+                    exit
+                    to
+                        protocol isis
+                    exit
+                    action accept
+                    exit
+                exit
+                default-action drop
+                exit
+            exit
+            commit
+        exit
+#--------------------------------------------------
+echo "BGP Configuration"
+#--------------------------------------------------
+        bgp
+            group "MP-BGP_PEERS"
+                family vpn-ipv4
+                peer-as 7029
+                neighbor 6.6.6.6
+                exit
+                neighbor 7.7.7.7
+                exit
+            exit
+            no shutdown
+        exit
+    exit
+
+#--------------------------------------------------
+echo "Log all events for service vprn, log syslog tls-client-profile Configuration"
+#--------------------------------------------------
+    log
+    exit
+
+exit all
