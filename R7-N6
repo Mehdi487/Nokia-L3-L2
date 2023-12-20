@@ -357,7 +357,6 @@ echo "Management Router Configuration"
 #--------------------------------------------------
     router management
     exit
-
 #--------------------------------------------------
 echo "Router (Network Side) Configuration"
 #--------------------------------------------------
@@ -637,11 +636,9 @@ echo "BGP Configuration"
             no shutdown
         exit
     exit
-
 #--------------------------------------------------
 echo "Log all events for service vprn, log syslog tls-client-profile Configuration"
 #--------------------------------------------------
     log
     exit
-
 exit all
